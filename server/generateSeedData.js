@@ -15,9 +15,9 @@ const CATEGORIES = [
 ];
 
 // Hostel Blocks & Rooms
-const BLOCKS = ['Block H-1', 'Block H-2', 'Block H-3', 'Block H-4', 'Block H-5', 'Block H-6', 'Block H-7', 'Block H-8', 'Girls Hostel G-1', 'Girls Hostel G-2', 'Girls Hostel G-3'];
-const FIRST_NAMES = ['Aarav', 'Ananya', 'Rohan', 'Priya', 'Aditya', 'Sneha', 'Rahul', 'Kavya', 'Vikram', 'Neha', 'Siddharth', 'Meera', 'Dev', 'Ishita', 'Arjun', 'Riya', 'Karan', 'Tanvi', 'Varun', 'Pooja', 'Yash', 'Shruti', 'Kabir', 'Simran', 'Nikhil', 'Diya', 'Amit', 'Divya', 'Gaurav', 'Anushka'];
-const LAST_NAMES = ['Sharma', 'Verma', 'Patel', 'Gupta', 'Singh', 'Kumar', 'Reddy', 'Nair', 'Joshi', 'Chopra', 'Malhotra', 'Rao', 'Bhat', 'Deshmukh', 'Mehta', 'Kulkarni', 'Sen', 'Dutta', 'Saxena', 'Agrawal'];
+const BLOCKS = ['Block H-1', 'Block H-2', 'Block H-3', 'Block H-4', 'Block H-5', 'Block H-6', 'Block H-7', 'Block H-8', 'Block H-9', 'Block H-10', 'Girls Hostel G-1', 'Girls Hostel G-2', 'Girls Hostel G-3', 'Girls Hostel G-4', 'Girls Hostel G-5'];
+const FIRST_NAMES = ['Aarav', 'Ananya', 'Rohan', 'Priya', 'Aditya', 'Sneha', 'Rahul', 'Kavya', 'Vikram', 'Neha', 'Siddharth', 'Meera', 'Dev', 'Ishita', 'Arjun', 'Riya', 'Karan', 'Tanvi', 'Varun', 'Pooja', 'Yash', 'Shruti', 'Kabir', 'Simran', 'Nikhil', 'Diya', 'Amit', 'Divya', 'Gaurav', 'Anushka', 'Manish', 'Ritu', 'Sameer', 'Nisha', 'Tanya', 'Abhinav', 'Shweta', 'Pranav', 'Bhavna', 'Tarun'];
+const LAST_NAMES = ['Sharma', 'Verma', 'Patel', 'Gupta', 'Singh', 'Kumar', 'Reddy', 'Nair', 'Joshi', 'Chopra', 'Malhotra', 'Rao', 'Bhat', 'Deshmukh', 'Mehta', 'Kulkarni', 'Sen', 'Dutta', 'Saxena', 'Agrawal', 'Choudhury', 'Kapoor', 'Bhasin', 'Trivedi', 'Rathore'];
 
 // High Quality Real Unsplash Store Logos & Banners
 const STORE_LOGOS = [
@@ -46,7 +46,7 @@ const STORE_BANNERS = [
   'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=800'
 ];
 
-// Product Data Templates with Verified Real Unsplash Product Images
+// Comprehensive Product Data Templates with Real Product Images
 const PRODUCT_TEMPLATES = [
   // Study Essentials
   { category: 'study', categoryLabel: 'Study Essentials', name: 'Casio FX-991EX Scientific Calculator', price: 1299, original: 1599, img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&q=80&w=600' },
@@ -116,54 +116,49 @@ const PRODUCT_TEMPLATES = [
 ];
 
 function generateLargeSeedData() {
-  console.log('Generating high-density dataset with real images for CampusHub...');
+  console.log('Generating high-density dataset for CampusHub (50 Stores, 500 Products, 200 Users, 300 Orders)...');
 
   // 1. Categories
   const categories = CATEGORIES;
 
-  // 2. Stores (20 Stores)
+  // 2. Stores (50 Stores)
   const stores = [];
-  const storeNamesList = [
-    'Campus Mart Express', 'Hostel Night Canteen', 'TechHub Accessories & Repairs',
-    'Scholar Books & Stationery', 'Campus Print & Binding Hub', 'Hostel SuperStore',
-    'Electronics Corner', 'Late Night Bites', 'Campus Wear & Merch',
-    'Student Exchange Market', 'Green Grocery Hostel Hub', 'Daily Dairy & Snacks',
-    'Campus Pharmacy & Care', 'Book Worm Outlet', 'Digital Fix Tech Hub',
-    'Dorm Room Decor Store', 'Cycle Repair & Rental', 'Campus Laundry Drop',
-    'Fitness & Nutrition Corner', 'Gadget Universe'
-  ];
+  const storePrefixes = ['Campus', 'Hostel', 'Student', 'Academic', 'Express', 'Elite', 'Metro', 'Prime', 'Central', 'Global'];
+  const storeTypes = ['Mart', 'Store', 'Canteen', 'Tech Hub', 'Stationery', 'Boutique', 'Outlet', 'Supply Co.', 'Corner', 'Market'];
 
-  for (let i = 1; i <= 20; i++) {
+  for (let i = 1; i <= 50; i++) {
     const logoUrl = STORE_LOGOS[(i - 1) % STORE_LOGOS.length];
     const bannerUrl = STORE_BANNERS[(i - 1) % STORE_BANNERS.length];
     const catName = CATEGORIES[i % CATEGORIES.length].name.split(' ')[1];
+    const prefix = storePrefixes[i % storePrefixes.length];
+    const type = storeTypes[i % storeTypes.length];
 
     stores.push({
       id: `str-${i}`,
-      storeName: storeNamesList[i - 1] || `Campus Outlet #${i} - ${catName} Specialist`,
-      description: `Official campus partner offering premium quality ${catName.toLowerCase()} and hostel delivery.`,
-      sellerId: `usr-seller-${(i % 5) + 1}`,
+      storeName: i === 1 ? 'Campus Mart Express' : (i === 2 ? 'Hostel Night Canteen' : (i === 3 ? 'TechHub Accessories & Repairs' : `${prefix} ${type} #${i} - ${catName}`)),
+      description: `Official verified campus store providing high quality ${catName.toLowerCase()} and express hostel room delivery.`,
+      sellerId: `usr-seller-${(i % 25) + 1}`,
       logo: logoUrl,
       banner: bannerUrl,
-      rating: +(4.2 + (i % 8) * 0.1).toFixed(1),
-      verificationStatus: i % 4 !== 0,
-      status: i % 10 === 0 ? 'Pending' : 'Active'
+      rating: +(4.1 + (i % 9) * 0.1).toFixed(1),
+      verificationStatus: i % 5 !== 0,
+      status: i % 15 === 0 ? 'Pending' : 'Active'
     });
   }
 
-  // 3. Users (100 Users)
+  // 3. Users (200 Users)
   const users = [
     { id: 'usr-student-1', name: 'Alex Johnson', email: 'alex.student@campushub.edu', password: '$2a$10$encryptedPasswordHashStudent123', phone: '+91 98765 43210', role: 'Student', hostelBlock: 'Block H-4', roomNumber: '302', createdAt: '2026-01-15T08:00:00.000Z' },
     { id: 'usr-seller-1', name: 'Campus Tech Supplies', email: 'seller.tech@campushub.edu', password: '$2a$10$encryptedPasswordHashSeller456', phone: '+91 98123 45678', role: 'Seller', hostelBlock: 'Market Complex', roomNumber: 'Shop #12', createdAt: '2026-01-10T10:00:00.000Z' },
     { id: 'usr-admin-1', name: 'Super Admin', email: 'admin@campushub.edu', password: '$2a$10$encryptedPasswordHashAdmin789', phone: '+91 90000 00000', role: 'Admin', hostelBlock: 'Admin Block', roomNumber: 'A-101', createdAt: '2026-01-01T00:00:00.000Z' }
   ];
 
-  for (let i = 4; i <= 100; i++) {
+  for (let i = 4; i <= 200; i++) {
     const fname = FIRST_NAMES[i % FIRST_NAMES.length];
     const lname = LAST_NAMES[(i * 3) % LAST_NAMES.length];
     const block = BLOCKS[i % BLOCKS.length];
-    const room = `${(i % 4) + 1}0${(i % 9) + 1}`;
-    const role = i <= 15 ? 'Seller' : (i === 16 ? 'Admin' : 'Student');
+    const room = `${(i % 5) + 1}0${(i % 9) + 1}`;
+    const role = i <= 30 ? 'Seller' : (i <= 33 ? 'Admin' : 'Student');
     users.push({
       id: `usr-${i}`,
       name: `${fname} ${lname}`,
@@ -177,16 +172,18 @@ function generateLargeSeedData() {
     });
   }
 
-  // 4. Products (200+ Products)
+  // 4. Products (500 Products)
   const products = [];
   let prodIdx = 1;
+  const prefixes = ['', 'Pro Edition: ', 'Deluxe Pack: ', 'Campus Special: ', 'Premium Series: ', 'Student Pack: ', 'Ultra Edition: ', 'Bundle Pack: ', 'Special Edition: ', 'Mega Pack: '];
 
-  for (let round = 0; round < 4; round++) {
+  for (let round = 0; round < 10; round++) {
     PRODUCT_TEMPLATES.forEach((tmpl) => {
+      if (prodIdx > 500) return;
       const storeObj = stores[(prodIdx % stores.length)];
-      const prefix = round === 0 ? '' : (round === 1 ? 'Pro Edition: ' : (round === 2 ? 'Deluxe Pack: ' : 'Campus Special: '));
-      const priceVariation = Math.round(tmpl.price * (1 + (round * 0.1)));
-      const originalVariation = Math.round(tmpl.original * (1 + (round * 0.1)));
+      const prefix = prefixes[round % prefixes.length];
+      const priceVariation = Math.round(tmpl.price * (1 + (round * 0.05)));
+      const originalVariation = Math.round(tmpl.original * (1 + (round * 0.05)));
 
       products.push({
         id: `prod-${prodIdx}`,
@@ -195,11 +192,11 @@ function generateLargeSeedData() {
         categoryLabel: tmpl.categoryLabel,
         price: priceVariation,
         originalPrice: originalVariation,
-        rating: +(4.1 + ((prodIdx * 3) % 9) * 0.1).toFixed(1),
-        reviewsCount: 15 + (prodIdx * 7) % 350,
+        rating: +(4.0 + ((prodIdx * 3) % 10) * 0.1).toFixed(1),
+        reviewsCount: 10 + (prodIdx * 7) % 450,
         deliveryTime: prodIdx % 3 === 0 ? 'Delivery in 30 mins' : (prodIdx % 2 === 0 ? 'Delivery in 1 hr' : 'Delivery today'),
         image: tmpl.img,
-        stock: 5 + (prodIdx * 11) % 80,
+        stock: 5 + (prodIdx * 13) % 100,
         store: storeObj.storeName,
         createdAt: new Date(2026, 1, (prodIdx % 25) + 1, (prodIdx % 12) + 8).toISOString()
       });
@@ -207,9 +204,9 @@ function generateLargeSeedData() {
     });
   }
 
-  // 5. Orders (100 Orders)
+  // 5. Orders (300 Orders)
   const orders = [];
-  for (let i = 1; i <= 100; i++) {
+  for (let i = 1; i <= 300; i++) {
     const userObj = users[i % users.length];
     const item1 = products[(i * 3) % products.length];
     const item2 = products[(i * 7) % products.length];
@@ -251,7 +248,7 @@ function generateLargeSeedData() {
 `);
 
   const seedFileContent = `/**
- * CampusHub Comprehensive Seed Data
+ * CampusHub Expanded Seed Data
  * Total Entries: ${products.length} Products, ${stores.length} Stores, ${users.length} Users, ${orders.length} Orders
  */
 
@@ -270,7 +267,7 @@ export const INITIAL_ORDERS = ${JSON.stringify(orders, null, 2)};
   fs.writeFileSync(outputPath, seedFileContent, 'utf-8');
 
   const lineCount = seedFileContent.split('\n').length;
-  console.log(`Successfully written seed file with real images to ${outputPath}. Total Lines: ${lineCount}`);
+  console.log(`Successfully written seed file to ${outputPath}. Total Lines: ${lineCount}`);
 }
 
 generateLargeSeedData();
